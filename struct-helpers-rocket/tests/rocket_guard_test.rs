@@ -14,9 +14,13 @@ pub fn to_lower_case(s: &mut String) -> bool {
     true
 }
 
+pub fn min_length(s: &mut String, n: i32) -> bool {
+    s.len() >= n as usize
+}
+
 #[derive(Debug, Default, Deserialize, Helpers)]
 struct User {
-    #[helper(to_lower_case)]
+    #[helper(to_lower_case, min_length(5))]
     name: String,
     email: String,
     password: String,
@@ -55,5 +59,22 @@ mod test {
             .dispatch();
         assert_eq!(response.status(), Status::Ok);
         assert_eq!(response.into_string().unwrap(), "john doe");
+    }
+
+    #[test]
+    fn hello_world_wrong_name_length() {
+        let client = Client::tracked(rocket()).expect("valid rocket instance");
+        let response = client
+            .post(uri!(super::hello))
+            .header(ContentType::JSON)
+            .body(
+                r##"{
+                    "name": "John",
+                    "email": "j.doe@m.com",
+                    "password": "123456"
+                }"##,
+            )
+            .dispatch();
+        assert_eq!(response.status(), Status::BadRequest);
     }
 }
