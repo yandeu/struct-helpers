@@ -59,8 +59,7 @@ struct_helpers = { git = "https://github.com/yandeu/struct-helpers", features = 
 
 ```rust
 #[macro_use] extern crate rocket;
-use rocket::serde::json::Json;
-use rocket::serde::Deserialize;
+use rocket::serde::{ json::Json, Deserialize };
 use struct_helpers::{ to_lower_case, Helpers, rocket::guard::HelpersGuard };
 
 #[derive(Debug, Deserialize, Helpers)]
