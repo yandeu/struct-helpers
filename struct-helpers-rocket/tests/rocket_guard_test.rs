@@ -28,7 +28,7 @@ struct User {
 
 #[post("/", format = "application/json", data = "<user>")]
 fn hello(user: HelpersGuard<Json<User>>) -> String {
-    let name = user.0.name.clone();
+    let name = user.into_deep_inner().name.clone();
     name
 }
 
