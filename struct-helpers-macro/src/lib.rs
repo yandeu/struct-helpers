@@ -104,7 +104,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
     }
 
     let output = quote! {
-        impl #name {
+        impl Helpers for #name {
             fn run_helpers(&mut self) -> bool {
                 let mut error = "".to_string();
                 #body

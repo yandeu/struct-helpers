@@ -49,3 +49,28 @@ fn main() {
     assert_eq!(u.thanks, "Thank you 100 times!");
 }
 ```
+
+## Rocket.rs Guard
+
+```toml
+[dependencies]
+struct-helpers = { git = "https://github.com/yandeu/struct-helpers", features = [ "rocket" ] }
+```
+
+```rust
+#[macro_use] extern crate rocket;
+use rocket::serde::json::Json;
+use rocket::serde::Deserialize;
+use struct_helpers::{ to_lower_case, Helpers, rocket::guard::HelpersGuard };
+
+#[derive(Debug, Deserialize, Helpers)]
+struct User {
+    #[helper(to_lower_case)]
+    name: String,
+}
+
+#[post("/", format = "application/json", data = "<user>")]
+fn hello(user: HelpersGuard<Json<User>>) -> String {
+    user.into_deep_inner().name
+}
+```

@@ -1,6 +1,10 @@
 // test code in README file
 #[doc = include_str!("../README.md")]
 pub use struct_helpers_macro::Helpers;
+pub use struct_helpers_trait::Helpers;
+
+#[cfg(feature = "rocket")]
+pub use struct_helpers_rocket::rocket;
 
 pub fn trim(s: &mut String) -> bool {
     *s = s.trim().to_string();

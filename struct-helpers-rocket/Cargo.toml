@@ -1,0 +1,13 @@
+[package]
+name = "struct_helpers_rocket"
+version = "0.0.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rocket = {version = "0.5.0-rc.2", default-features = false, features = ["json"]}
+serde = { version = "1.0", features = ["derive"] }
+serde_json =  { version = "1.0" }
+struct_helpers_trait = { version = "0.0.0", path = "../struct-helpers-trait" }
+struct_helpers_macro = { version = "0.0.0", path = "../struct-helpers-macro" }
