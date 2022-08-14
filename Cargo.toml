@@ -7,19 +7,15 @@ edition = "2021"
 
 [dependencies]
 struct_helpers_macro = { path = "struct-helpers-macro", version = "0.0.0", optional = true }
-struct_helpers_trait = { path = "struct-helpers-trait", version = "0.0.0", optional = true }
-struct_helpers_rocket = { path = "struct-helpers-rocket", version = "0.0.0", optional = true }
-
-[dev-dependencies]
-rocket = { version = "0.5.0-rc.2", default-features = false, features = ["json"] }
-serde = { version = "1.0", features = ["derive"] }
-serde_json =  { version = "1.0" }
+rocket = { version = "0.5.0-rc.2", default-features = false, features = ["json"], optional = true }
+serde = { version = "1.0", features = ["derive"], optional = true }
+serde_json = { version = "1.0", optional = true }
 
 [features]
-default = [ "derive" ]
-derive = [ "struct_helpers_trait", "struct_helpers_macro" ]
-rocket = [ "dep:struct_helpers_rocket" ]
+default = ["derive"]
+derive = ["struct_helpers_macro"]
+rocket = ["dep:rocket", "dep:serde", "dep:serde_json"]
 
 
 [workspace]
-members = ["struct-helpers-trait", "struct-helpers-macro","struct-helpers-rocket"]
+members = ["struct-helpers-macro"]

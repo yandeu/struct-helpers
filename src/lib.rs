@@ -1,10 +1,14 @@
 // test code in README file
 #[doc = include_str!("../README.md")]
-pub use struct_helpers_macro::Helpers;
-pub use struct_helpers_trait::Helpers;
-
+// rocket feature
 #[cfg(feature = "rocket")]
-pub use struct_helpers_rocket::rocket;
+pub mod rocket;
+// macro
+pub use struct_helpers_macro::Helpers;
+
+pub trait Helpers {
+    fn run_helpers(&mut self) -> bool;
+}
 
 pub fn trim(s: &mut String) -> bool {
     *s = s.trim().to_string();

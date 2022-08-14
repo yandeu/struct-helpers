@@ -5,9 +5,7 @@ extern crate rocket;
 
 use rocket::serde::json::Json;
 use serde::Deserialize;
-use struct_helpers_macro::Helpers;
-use struct_helpers_rocket::rocket::guard::HelpersGuard;
-use struct_helpers_trait::Helpers;
+use struct_helpers::{rocket::guard::HelpersGuard, Helpers};
 
 pub fn to_lower_case(s: &mut String) -> bool {
     *s = s.to_lowercase();
