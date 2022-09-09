@@ -23,10 +23,10 @@ jobs:
         uses: actions-rs/cargo@v1
 
       - name: Build
-        run: cargo build
+        run: cargo build --all-features
 
       - name: Test
         run: cargo test --all --all-features
 
       - name: Run
-        run: cargo run
+        run: cargo run --all-features
