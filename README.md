@@ -73,3 +73,7 @@ fn hello(user: HelpersGuard<Json<User>>) -> String {
     user.into_deep_inner().name
 }
 ```
+
+# Development
+
+`cargo watch -x 'run --all-features'`
