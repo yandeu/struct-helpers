@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+use serde_with::skip_serializing_none;
 use struct_helpers::{to_lower_case, trim, Helpers};
 
 // #[derive(Debug, Default, Helpers)]
@@ -6,8 +8,11 @@ use struct_helpers::{to_lower_case, trim, Helpers};
 //     a: i32,
 // }
 
-#[derive(Debug, Default, Helpers)]
+#[skip_serializing_none]
+#[derive(Debug, Default, Helpers, Deserialize, Serialize)]
 struct Point {
+    #[serde(rename = "_id")]
+    id: Option<String>,
     #[helper(validate_len, with_param(3, "hello"))]
     x: String,
     // #[helper(hello)]

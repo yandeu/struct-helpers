@@ -10,11 +10,13 @@ struct_helpers_macro = { path = "struct-helpers-macro", version = "0.0.0", optio
 rocket = { version = "0.5.0-rc.2", default-features = false, features = ["json"], optional = true }
 serde = { version = "1.0", features = ["derive"], optional = true }
 serde_json = { version = "1.0", optional = true }
+serde_with = {version = "2.0", optional = true}
 
 [features]
 default = ["derive"]
 derive = ["struct_helpers_macro"]
 rocket = ["dep:rocket", "dep:serde", "dep:serde_json"]
+dev = ["dep:serde_with"]
 
 
 [workspace]
