@@ -40,6 +40,12 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
                 params: Vec<Literal>,
             }
 
+            // filter all attributes that are not "helper"
+            let ident = attr.path.segments.first().unwrap().ident.to_string();
+            if ident != "helper" {
+                continue;
+            }
+
             for f in attr.tokens.clone().into_iter() {
                 let mut fnns: Vec<Fnn> = vec![];
 
