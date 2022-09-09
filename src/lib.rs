@@ -20,6 +20,13 @@ pub fn to_lower_case(s: &mut String) -> bool {
     true
 }
 
+pub fn to_lower_case_optional(s_opt: &mut Option<String>) -> bool {
+    if let Some(ref mut s) = s_opt {
+        *s = s.to_lowercase();
+    }
+    true
+}
+
 pub fn to_upper_case(s: &mut String) -> bool {
     *s = s.to_uppercase();
     true
