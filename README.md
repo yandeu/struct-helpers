@@ -1,5 +1,6 @@
 # Struct Helpers
 
+[![dependency status](https://deps.rs/repo/github/yandeu/struct-helpers/status.svg)](https://deps.rs/repo/github/yandeu/struct-helpers)
 [![CI](https://github.com/yandeu/struct-helpers/actions/workflows/main.yml/badge.svg)](https://github.com/yandeu/struct-helpers/actions/workflows/main.yml)
 
 ## Install
