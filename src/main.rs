@@ -93,9 +93,8 @@ fn main() {
 
     // p.y = Some("  DDD".to_string());
 
-    let success = p.run_helpers();
-    if !success {
-        println!("Something went wrong..")
+    if let Err(msg) = p.run_helpers() {
+        println!("{}", msg)
     }
 
     println!("x = {}", &p.x);

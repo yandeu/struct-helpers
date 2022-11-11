@@ -42,9 +42,8 @@ fn main() {
         thanks: "Thank you".to_string()
     };
 
-    let success = u.run_helpers();
+    u.run_helpers().unwrap();
 
-    assert_eq!(success, true);
     assert_eq!(u.name, "JOHN");
     assert_eq!(u.age, 40);
     assert_eq!(u.thanks, "Thank you 100 times!");

@@ -35,18 +35,10 @@ pub mod guard {
             match data_outcome {
                 Outcome::Failure((status, err)) => Outcome::Failure((status, Err(err))),
                 Outcome::Forward(err) => Outcome::Forward(err),
-                Outcome::Success(mut data) => {
-                    let success = data.0.run_helpers();
-
-                    if success {
-                        Outcome::Success(HelpersGuard(data))
-                    } else {
-                        Outcome::Failure((
-                            Status::BadRequest,
-                            Ok("Something went wrong".to_string()),
-                        ))
-                    }
-                }
+                Outcome::Success(mut data) => match data.0.run_helpers() {
+                    Ok(_) => Outcome::Success(HelpersGuard(data)),
+                    Err(e) => Outcome::Failure((Status::BadRequest, Ok(e))),
+                },
             }
         }
     }

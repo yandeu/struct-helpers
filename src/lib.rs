@@ -7,7 +7,7 @@ pub mod rocket;
 pub use struct_helpers_macro::Helpers;
 
 pub trait Helpers {
-    fn run_helpers(&mut self) -> bool;
+    fn run_helpers(&mut self) -> Result<(), String>;
 }
 
 pub fn trim(s: &mut String) -> bool {

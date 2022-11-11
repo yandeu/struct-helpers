@@ -30,9 +30,8 @@ fn it_works_with_option() {
         y: Some("y".to_string()),
     };
 
-    let success = p.run_helpers();
+    p.run_helpers().unwrap();
 
-    assert_eq!(success, true);
     assert_eq!(p.x, "hello, x");
     assert_eq!(p.y.unwrap(), "hello, y");
 }

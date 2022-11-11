@@ -111,13 +111,18 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 
     let output = quote! {
         impl Helpers for #name {
-            fn run_helpers(&mut self) -> bool {
+            fn run_helpers(&mut self) -> Result<(), String> {
                 let mut error = "".to_string();
                 #body
                 if error != "" {
                     println!("ERROR: {}",error.to_string());
                 }
-                error.len() == 0
+                if error.len() == 0 {
+                    return Ok(());
+                }
+                else {
+                    return Err(error);
+                }
             }
         }
     };

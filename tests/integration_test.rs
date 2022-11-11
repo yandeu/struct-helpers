@@ -33,9 +33,8 @@ fn it_works() {
         z: 2,
     };
 
-    let success = p.run_helpers();
+    p.run_helpers().unwrap();
 
-    assert_eq!(success, true);
     assert_eq!(p.x, "5, hello");
     assert_eq!(p.y, "8, hello");
     assert_eq!(p.z, 4);

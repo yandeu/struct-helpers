@@ -24,8 +24,7 @@ fn it_works_with_params() {
         x: "hello".to_string(),
     };
 
-    let success = p.run_helpers();
+    p.run_helpers().unwrap();
 
-    assert_eq!(success, true);
     assert_eq!(p.x, "hello10hello");
 }
