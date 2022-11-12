@@ -35,11 +35,13 @@ pub fn to_upper_case(s: &mut String) -> bool {
     true
 }
 
+#[cfg(feature = "regex")]
 pub fn regex(s: &mut String, re: &'static str) -> bool {
     let re = Regex::new(re).unwrap();
     re.is_match(s)
 }
 
+#[cfg(feature = "regex")]
 pub fn regex_optional(s_opt: &mut Option<String>, re: &'static str) -> bool {
     if let Some(ref mut s) = s_opt {
         let re = Regex::new(re).unwrap();
