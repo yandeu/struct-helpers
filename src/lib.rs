@@ -1,5 +1,8 @@
 // test code in README file
 #[doc = include_str!("../README.md")]
+// regex feature
+#[cfg(feature = "regex")]
+use regex::Regex;
 // rocket feature
 #[cfg(feature = "rocket")]
 pub mod rocket;
@@ -29,5 +32,18 @@ pub fn to_lower_case_optional(s_opt: &mut Option<String>) -> bool {
 
 pub fn to_upper_case(s: &mut String) -> bool {
     *s = s.to_uppercase();
+    true
+}
+
+pub fn regex(s: &mut String, re: &'static str) -> bool {
+    let re = Regex::new(re).unwrap();
+    re.is_match(s)
+}
+
+pub fn regex_optional(s_opt: &mut Option<String>, re: &'static str) -> bool {
+    if let Some(ref mut s) = s_opt {
+        let re = Regex::new(re).unwrap();
+        return re.is_match(s);
+    }
     true
 }

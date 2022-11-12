@@ -50,6 +50,30 @@ fn main() {
 }
 ```
 
+## Validate with Regex
+
+```rust
+// features = [ "regex" ]
+use struct_helpers::{regex, regex_optional, Helpers};
+
+#[derive(Debug, Default, Helpers)]
+struct User {
+    #[helper(regex(r"^[a-f0-9]{6}$"))]
+    id_1: String,
+    #[helper(regex(r"^[a-f0-9]{6}$"))]
+    id_2: Option<String>,
+}
+
+fn main() {
+    let mut user = User {
+        id_1: String::from("123abc"),
+        id_2: Some(String::from("123abc")),
+    };
+
+    user.run_helpers().unwrap();
+}
+```
+
 ## Rocket.rs Guard
 
 ```toml
