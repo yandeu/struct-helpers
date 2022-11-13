@@ -90,6 +90,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
                     if !is_option {
                         body.append_all({
                             quote! {
+                                #[allow(clippy::unnecessary_mut_passed)]
                                 if !#function_name(&mut self.#field_name #params_q) {
                                     error = ["Error in fn", #ident_string, "for field",#field_name_string ].join(" ");
                                 }
@@ -98,6 +99,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
                     } else {
                         body.append_all({
                             quote! {
+                                #[allow(clippy::unnecessary_mut_passed)]
                                 if !#function_name_optional(&mut self.#field_name #params_q) {
                                     error = ["Error in fn", #ident_string, "for field",#field_name_string ].join(" ");
                                 }
