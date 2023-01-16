@@ -7,7 +7,7 @@
 
 ```toml
 [dependencies]
-struct_helpers = { git = "https://github.com/yandeu/struct-helpers" }
+struct-helpers = { git = "https://github.com/yandeu/struct-helpers" }
 ```
 
 ## Example
@@ -78,7 +78,7 @@ fn main() {
 
 ```toml
 [dependencies]
-struct_helpers = { git = "https://github.com/yandeu/struct-helpers", features = [ "rocket" ] }
+struct-helpers = { git = "https://github.com/yandeu/struct-helpers", features = [ "rocket" ] }
 ```
 
 ```rust
