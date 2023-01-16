@@ -5,15 +5,18 @@ extern crate rocket;
 
 use rocket::serde::json::Json;
 use serde::Deserialize;
-use struct_helpers::{rocket::guard::HelpersGuard, Helpers};
+use struct_helpers::{rocket::guard::HelpersGuard, Helpers, HelpersResult};
 
-pub fn to_lower_case(s: &mut String) -> bool {
+pub fn to_lower_case(s: &mut String) -> HelpersResult {
     *s = s.to_lowercase();
-    true
+    Ok(())
 }
 
-pub fn min_length(s: &mut String, n: i32) -> bool {
-    s.len() >= n as usize
+pub fn min_length(s: &mut String, n: i32) -> HelpersResult {
+    match s.len() >= n as usize {
+        true => Ok(()),
+        false => Err("min_length failed"),
+    }
 }
 
 #[derive(Debug, Default, Deserialize, Helpers)]

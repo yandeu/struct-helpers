@@ -1,4 +1,4 @@
-use struct_helpers::Helpers;
+use struct_helpers::{Helpers, HelpersResult};
 
 #[test]
 fn validation() {
@@ -8,8 +8,11 @@ fn validation() {
         id: String,
     }
 
-    fn validate_len(x: &String, len: usize) -> bool {
-        x.len() == len
+    fn validate_len(x: &String, len: usize) -> HelpersResult {
+        match x.len() == len {
+            true => Ok(()),
+            false => Err("validate_len failed"),
+        }
     }
 
     let mut user1 = User {
@@ -28,5 +31,5 @@ fn validation() {
       panic!()
     };
 
-    assert_eq!(e, "Error in fn validate_len for field id");
+    assert_eq!(e, "validate_len failed");
 }

@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
-use struct_helpers::{to_lower_case, trim, Helpers};
+use struct_helpers::{to_lower_case, trim, Helpers, HelpersResult};
 
 // #[derive(Debug, Default, Helpers)]
 // struct SubPoint {
@@ -30,14 +30,17 @@ struct Point {
 //     return true;
 // }
 
-fn with_param(x: &String, y: i32, z: &str) -> bool {
+fn with_param(x: &String, y: i32, z: &str) -> HelpersResult {
     println!("{}/{}/{}", x, y, z);
-    true
+    Ok(())
 }
 
-fn validate_len(x: &String) -> bool {
+fn validate_len(x: &String) -> HelpersResult {
     println!("len {} {}", x.len(), x.len() > 5);
-    x.len() > 5
+    match x.len() > 5 {
+        true => Ok(()),
+        false => Err("string in to length"),
+    }
 }
 
 // fn mod_sub_point(p: &mut SubPoint) -> bool {

@@ -13,7 +13,7 @@ struct_helpers = { git = "https://github.com/yandeu/struct-helpers" }
 ## Example
 
 ```rust
-use struct_helpers::{to_lower_case, to_upper_case, trim, Helpers};
+use struct_helpers::{to_lower_case, to_upper_case, trim, Helpers, HelpersResult};
 
 #[derive(Helpers)]
 pub struct User {
@@ -25,14 +25,14 @@ pub struct User {
     thanks: String
 }
 
-fn times_two(n: &mut i32) -> bool {
+fn times_two(n: &mut i32) -> HelpersResult {
     *n *= 2;
-    true
+    Ok(())
 }
 
-fn with_param(s: &mut String, x: i32, y: &str) -> bool {
+fn with_param(s: &mut String, x: i32, y: &str) -> HelpersResult {
     *s = format!("{} {} {}", s, x * 10, y);
-    true
+    Ok(())
 }
 
 fn main() {
@@ -100,4 +100,8 @@ fn hello(user: HelpersGuard<Json<User>>) -> String {
 
 # Development
 
+Run  
 `cargo watch -x 'run --all-features'`
+
+Test  
+`cargo test --all --all-features -- --nocapture`

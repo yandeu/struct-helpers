@@ -1,4 +1,4 @@
-use struct_helpers::Helpers;
+use struct_helpers::{Helpers, HelpersResult};
 
 #[test]
 fn it_works_with_option() {
@@ -10,19 +10,19 @@ fn it_works_with_option() {
         y: Option<String>,
     }
 
-    fn hello(s: &mut String) -> bool {
+    fn hello(s: &mut String) -> HelpersResult {
         let mut tmp = "hello, ".to_string();
         tmp.push_str(s);
         *s = tmp;
-        true
+        Ok(())
     }
 
     // Option wrapper for hello()
-    fn hello_optional(s_opt: &mut Option<String>) -> bool {
+    fn hello_optional(s_opt: &mut Option<String>) -> HelpersResult {
         if let Some(ref mut s) = s_opt {
             return hello(s);
         }
-        false
+        Ok(())
     }
 
     let mut p = Point {

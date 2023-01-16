@@ -82,27 +82,29 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
                     }
 
                     let ident_string = f.ident.clone().to_string();
-                    let field_name_string = field_name.clone().to_string();
+                    let _field_name_string = field_name.clone().to_string();
 
-                    let function_name = format_ident!("{}", ident_string);
-                    let function_name_optional = format_ident!("{}_optional", ident_string);
+                    let function_name = format_ident!("{}", &ident_string);
+                    let function_name_optional = format_ident!("{}_optional", &ident_string);
 
                     if !is_option {
                         body.append_all({
                             quote! {
                                 #[allow(clippy::unnecessary_mut_passed)]
-                                if !#function_name(&mut self.#field_name #params_q) {
-                                    error = ["Error in fn", #ident_string, "for field",#field_name_string ].join(" ");
-                                }
+                                if let Err(e) = #function_name(&mut self.#field_name #params_q) {
+                                    error = e.to_string();
+                                    // error = ["Error in fn", #ident_string, "for field",#field_name_string ].join(" ");
+                                };
                             }
                         });
                     } else {
                         body.append_all({
                             quote! {
                                 #[allow(clippy::unnecessary_mut_passed)]
-                                if !#function_name_optional(&mut self.#field_name #params_q) {
-                                    error = ["Error in fn", #ident_string, "for field",#field_name_string ].join(" ");
-                                }
+                                if let Err(e) = #function_name_optional(&mut self.#field_name #params_q) {
+                                    error = e.to_string();
+                                    // error = ["Error in fn", #ident_string, "for field",#field_name_string ].join(" ");
+                                };
                             }
                         });
                     }
@@ -114,10 +116,10 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
     let output = quote! {
         impl Helpers for #name {
             fn run_helpers(&mut self) -> Result<(), String> {
-                let mut error = "".to_string();
+                let mut error = String::from("");
                 #body
                 if error != "" {
-                    println!("ERROR: {}",error.to_string());
+                    println!("ERROR: {}",error);
                 }
                 if error.len() == 0 {
                     return Ok(());
