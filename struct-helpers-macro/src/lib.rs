@@ -92,7 +92,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
                             quote! {
                                 #[allow(clippy::unnecessary_mut_passed)]
                                 if let Err(e) = #function_name(&mut self.#field_name #params_q) {
-                                    error = e.to_string();
+                                    error = Some(e.to_string());
                                     // error = ["Error in fn", #ident_string, "for field",#field_name_string ].join(" ");
                                 };
                             }
@@ -102,7 +102,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
                             quote! {
                                 #[allow(clippy::unnecessary_mut_passed)]
                                 if let Err(e) = #function_name_optional(&mut self.#field_name #params_q) {
-                                    error = e.to_string();
+                                    error = Some(e.to_string());
                                     // error = ["Error in fn", #ident_string, "for field",#field_name_string ].join(" ");
                                 };
                             }
@@ -116,16 +116,16 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
     let output = quote! {
         impl Helpers for #name {
             fn run_helpers(&mut self) -> Result<(), String> {
-                let mut error = String::from("");
+                let mut error:Option<String> = None;
                 #body
-                if error != "" {
-                    println!("ERROR: {}",error);
-                }
-                if error.len() == 0 {
-                    return Ok(());
-                }
-                else {
-                    return Err(error);
+                match error {
+                    Some(e)=> {
+                        println!("ERROR: {}", e);
+                        Err(e)
+                    },
+                    None => {
+                        Ok(())
+                    }
                 }
             }
         }
