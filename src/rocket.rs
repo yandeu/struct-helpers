@@ -33,11 +33,11 @@ pub mod guard {
             let data_outcome = <Json<D> as FromData<'r>>::from_data(req, data).await;
 
             match data_outcome {
-                Outcome::Failure((status, err)) => Outcome::Failure((status, Err(err))),
+                Outcome::Error((status, err)) => Outcome::Error((status, Err(err))),
                 Outcome::Forward(err) => Outcome::Forward(err),
                 Outcome::Success(mut data) => match data.0.run_helpers() {
                     Ok(_) => Outcome::Success(HelpersGuard(data)),
-                    Err(e) => Outcome::Failure((Status::BadRequest, Ok(e))),
+                    Err(e) => Outcome::Error((Status::BadRequest, Ok(e))),
                 },
             }
         }

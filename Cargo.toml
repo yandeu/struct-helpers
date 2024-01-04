@@ -7,21 +7,21 @@ edition = "2021"
 
 [dependencies]
 struct-helpers-macro = { path = "struct-helpers-macro", version = "0.0.0", optional = true }
-rocket = { version = "0.5.0-rc.2", default-features = false, features = ["json"], optional = true }
-serde = { version = "1.0", features = ["derive"], optional = true }
+rocket = { version = "0.5.0", default-features = false, features = [ "json" ], optional = true }
+serde = { version = "1.0", features = [ "derive" ], optional = true }
 serde_json = { version = "1.0", optional = true }
 serde_with = { version = "2.0", optional = true }
 regex = { version = "1.7", optional = true }
 
 [features]
-default = ["derive"]
-derive = ["struct-helpers-macro"]
-rocket = ["dep:rocket", "dep:serde", "dep:serde_json"]
-regex = ["dep:regex"]
-dev = ["dep:serde_with"]
+default = [ "derive" ]
+derive = [ "struct-helpers-macro" ]
+rocket = [ "dep:rocket", "dep:serde", "dep:serde_json" ]
+regex = [ "dep:regex" ]
+dev = [ "dep:serde_with" ]
 
 [workspace]
-members = ["struct-helpers-macro"]
+members = [ "struct-helpers-macro" ]
 
 # enable all features in doctests
 [package.metadata."docs.rs"]
