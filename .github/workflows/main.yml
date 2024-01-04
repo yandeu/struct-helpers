@@ -10,17 +10,11 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
+      - run: rustup toolchain install stable --profile minimal
 
       - uses: Swatinem/rust-cache@v1
-
-      - name: Cargo
-        uses: actions-rs/cargo@v1
 
       - name: Build
         run: cargo build --all-features
