@@ -10,7 +10,7 @@ struct-helpers-macro = { path = "struct-helpers-macro", version = "0.0.0", optio
 rocket = { version = "0.5.0", default-features = false, features = [ "json" ], optional = true }
 serde = { version = "1.0", features = [ "derive" ], optional = true }
 serde_json = { version = "1.0", optional = true }
-serde_with = { version = "2.0", optional = true }
+serde_with = { version = "3.0.0", optional = true }
 regex = { version = "1.7", optional = true }
 
 [features]
